@@ -1,2 +1,0 @@
-class ClothesController < ApplicationController
-end

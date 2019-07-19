@@ -1,0 +1,18 @@
+<div class = "registar-content">
+  <div class = "registar-content__inner">
+    <%= form_with model: @suit do |form| %>
+      <div class="registar-content__inner__image" onClick="$('#suit_img').click()">
+        <%= form.label "picture",class:"registar-content__inner__image__label" %>
+        <%# <i class="fa fa-image"></i> %>
+        <i class="fas fa-tshirt"></i>
+        <p class="registar-content__inner__image__label__guide"> Click Me! </p>
+      </div>
+      <%= form.file_field :image, style: "display:none;", id: :suit_img %>
+      <%= form.text_field :name, placeholder: 'name' %>
+      <%= form.select :status, Suit.statuses.keys.map {|k|[I18n.t("enums.suit.status.#{k}"), k]} %>
+      <%= form.select :maxtemperature, Suit.maxtemperatures.keys.map {|k|[I18n.t("enums.suit.maxtemperature.#{k}"), k]} %>
+      <%= form.select :minitemperature, Suit.minitemperatures.keys.map {|k|[I18n.t("enums.suit.minitemperature.#{k}"), k]} %>
+      <%= form.submit 'SENT'%>
+    <%end%>
+  </div>
+</div>
