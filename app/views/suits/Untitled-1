@@ -23,29 +23,18 @@
                 <p class = "registar-content__inner__form__status__box__washing__question">タンブラー乾燥は可能ですか？</p>
                 <div class = "registar-content__inner__form__status__box__washing__anwser">
                   <%= form.radio_button :status, "1", id: "yes" %>
-                  <%= form.label "yes", for: "yes", id: "yes" %>
+                  <%= form.label "yes", for: "yes", id: "ya" %>
                   <%= form.radio_button :status, "2", id: "no" %>
-                  <%= form.label "no", for: "no", id: "yes"  %>
+                  <%= form.label "no", for: "no", id: "ya"  %>
                 </div>
-              </div>
-              <div class = "registar-content__inner__form__status__box__temperature">
-                <p class = "registar-content__inner__form__status__box__temperature__question">何度ぐらいで使用しますか？</p>
-                <div class = "registar-content__inner__form__status__box__temperature__select ">
-                  <div class = "registar-content__inner__form__status__box__temperature__select__mini">
-                    <%= form.select :minitemperature, [['--',0],[0,1],[5,2],[10,3],[15,4],[20,5],[25,6],[30,7],[35,8]], {}, {id: 'minitemperature'} %>
-                  </div>
-                  <p class = "registar-content__inner__form__status__box__temperature__select__degree max">〜</p>
-                  <div class = "registar-content__inner__form__status__box__temperature__select__max">
-                    <%= form.select :maxtemperature, [['--',0],[5,1], [10,2],[15,3],[20,4],[25,5],[30,6],[35,7],[40,8]], {}, {id: 'maxtemperature'}%>
-                  </div>
-                  <p class = "registar-content__inner__form__status__box__temperature__select__degree">℃</p>
+                <div class = "registar-content__inner__form__status">
+                  <%= form.select :minitemperature, Suit.minitemperatures.keys.map {|k|[I18n.t("enums.suit.minitemperature.#{k}"), k]} %>
+                  <%= form.select :maxtemperature, Suit.maxtemperatures.keys.map {|k|[I18n.t("enums.suit.maxtemperature.#{k}"), k]} %>
                 </div>
               </div>
             </div>
           </div>
-        <div class = "registar-content__inner__form__finish">
-          <%= form.submit 'SENT!', class: "registar-content__inner__form__finish__submit"%>
+          <%= form.submit 'SENT'%>
         </div>
-      </div>
     <%end%>
   </div>

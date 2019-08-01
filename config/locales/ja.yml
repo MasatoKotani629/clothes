@@ -2,9 +2,8 @@ ja:
   enums:
     suit:
       status:
-        natunaldrying: '乾燥器未対応'
-        heatedairdrying: '乾燥器対応'
       maxtemperature: 
+        '--': '--'
         '10': '10℃'
         '15': '15℃'
         '20': '20℃'
@@ -13,6 +12,7 @@ ja:
         '35': '35℃'
         '40': '40℃'
       minitemperature: 
+        '--': '--'
         '0': '0℃'
         '10': '10℃'
         '15': '15℃'
