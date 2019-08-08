@@ -4,6 +4,17 @@ class SuitsController < ApplicationController
   end
 
   def index
+    mini_temp = params[:mini_temp]
+    max_temp = params[:max_temp]
+    mini_temp = mini_temp.to_s
+    max_temp = max_temp.to_s
+    if params[:status] == "1"
+      @suits = Suit.where('minitemperature <=?', mini_temp).where('maxtemperature >=?', max_temp)
+    end
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def create
@@ -12,6 +23,14 @@ class SuitsController < ApplicationController
     @suit.save 
     redirect_to root_path, notice: 'グループを作成しました'
   end
+
+  # def search
+  #   @suits = Suits.where("status: #{params[:status]}")
+  #   respond_to do |format|
+  #     format.html
+  #     format.json
+  #   end
+  # end
 
 
   private

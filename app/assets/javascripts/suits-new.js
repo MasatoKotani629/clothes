@@ -19,9 +19,7 @@ $(function() {
         $('.registar-content__inner__image__picture').remove();
         $('.registar-content__inner__image__change').remove();
         var html = buildimage(e.target.result,)
-        console.log(html)
         $('.registar-content__inner__image').append(html);
-        console.log(e.target.result)
       }
       reader.readAsDataURL(input.files[0]);
     }
