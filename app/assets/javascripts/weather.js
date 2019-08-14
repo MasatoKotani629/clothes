@@ -2,15 +2,13 @@ $(function() {
 
   var status_num = "status_num"
   var average_temp_num = "avereage_num"
-  var cloth_list = $(".content");
   var mini_temp = 0;
   var max_temp = 0;
   
-  function appendSuit(suit) {
+  function appendSuitImage(suit) {
+    var cloth_list = $(".content");
     var html =
-    `<div class="test">${ suit.id }</div>
-    <img src = ${ suit.image.url }>`
-
+    `<img src = ${ suit.image.url }>`
     cloth_list.append(html);
   }
 
@@ -54,7 +52,6 @@ $(function() {
     status_num = choose_weather(weather_tomorrow_time, tomorrow_list_num);
     average_temp_num = choose_temp(weather_today_time, today_list_num);
     mini_temp = convert_temp(average_temp_num)
-    console.log(mini_temp);
     max_temp = mini_temp + 1
 
 
@@ -68,7 +65,10 @@ $(function() {
     .done(function(suits) {
       if (suits.length !== 0){
         suits.forEach(function(suit){
-          appendSuit(suit);
+          if(suit.category_id === 2){
+          select_category(suit)
+          appendSuitImage(suit);
+          }
         });
       }
     })
@@ -127,7 +127,6 @@ $(function() {
           return "rain"
         } else  {
           // "no_rain"の場合は特定のrain以外の時間が全て含まれる
-          // console.log(weather_data_day_hours.getHours())
           return "no_rain"
         }
       }
@@ -164,7 +163,6 @@ $(function() {
       }
 
       function convert_temp(average_temp_num){
-        console.log(average_temp_num)
         for(var temp = 0; temp<=40; temp+=5){
           if(average_temp_num>=temp && average_temp_num<=temp+5){
             mini_temp = temp;
@@ -180,8 +178,10 @@ $(function() {
           nums+=5
         }
       }
+
+      function select_category(suit){
+        
+      }
 })
 
-parent_array = ['レディース','メンズ']
-child_array=['トップス','ジャケット/アウターパンツ','パンツ']
 

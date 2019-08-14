@@ -6,7 +6,9 @@
 
 <div class= "content">
   <div class = "content__inner">
+    <% if @suits.present? %>
     <%= form_tag('/suits', method: :get, id: "condition") do %>
+    <%end%>
     <%end%>
   </div>
 </div>
