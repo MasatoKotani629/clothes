@@ -1,11 +1,19 @@
 @import "./reset1";
 @import "font-awesome";
 @import "./label";
-@import "./link";
+@import "./color";
+@import "./modules";
 @import "./new";
 @import "./index";
+@import "./signup";
+@import "./signin";
 
-
+/*
+ * "ほのか明朝" licensed under the IPA Font License Agreement v1.0
+ * http://fontfree.me/966（配布元のURL）
+ * http://ipafont.ipa.go.jp/（IPAフォントのURL）
+ * http://ipafont.ipa.go.jp/ipa_font_license_v1.html（IPAフォントライセンスv1.0のURL）
+ */
 @font-face {
     font-family: 'ほのか明朝';
     src: url('font_1_honokamin.ttf') format('truetype');
@@ -44,11 +52,5 @@ body,html {
 
 
 
-h1,h2,h3,h4,h5,h6,body {
-  line-height: 1.57;
-  letter-spacing: 0.15em;
-  font-size: 16px;
-  color: $dark;
-  margin: 0;
-}
+
 

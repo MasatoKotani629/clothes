@@ -1,8 +1,0 @@
-@mixin linkStyle_blue {
-  text-decoration: none;
-  &:link { color: #0099e8; }
-  &:visited { color: #1373a3; }
-  &:hover { color: #1373a3;; }
-  &:active { color: #0099e8; }
-  &:hover { text-decoration:underline;}
-}

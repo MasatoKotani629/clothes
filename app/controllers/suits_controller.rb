@@ -1,5 +1,7 @@
 class SuitsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @all_categories = Category.all
     mini_temp = params[:mini_temp]
@@ -7,9 +9,9 @@ class SuitsController < ApplicationController
     mini_temp = mini_temp.to_s
     max_temp = max_temp.to_s
     if params[:status] == "2"
-      @suits = Suit.where('minitemperature <=?', mini_temp).where('maxtemperature >=?', max_temp)
+      @suits = Suit.where('minitemperature <=?', mini_temp).where('maxtemperature >=?', max_temp).where(user_id: current_user.id)
     else
-      @suits = Suit.where('minitemperature <=?', mini_temp).where('maxtemperature >=?', max_temp).where("(status = ?) OR (status = ?)", 1, 3)
+      @suits = Suit.where('minitemperature <=?', mini_temp).where('maxtemperature >=?', max_temp).where("(status = ?) OR (status = ?)", 1, 3).where(user_id: current_user.id)
     end
     respond_to do |format|
       format.html

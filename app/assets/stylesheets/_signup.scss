@@ -1,0 +1,54 @@
+.signup-user {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  &__inner {
+    width: 800px;
+    background-color: white;
+    text-align: center;
+    line-height: 1.57;
+    letter-spacing: 0.15em;
+    font-size: 20px;
+    color: $dark;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    h2 {
+      font-size: 30px;
+      text-align: center;
+    }
+    &__field {
+      height: 80px;
+      padding: 0px 100px;
+      margin: 15px 0px;
+      label {
+        display: inline-block;
+        line-height: 1.57;
+        letter-spacing: 0.15em;
+        font-size: 21px;
+        color: $dark;
+        margin: 0;
+      }
+      input {
+        width: 400px;
+        height: 30px;
+        display: inline-block;
+        border-radius: 10px;        
+      }
+    }
+    &__check {
+      margin: 20px 0px;
+      label {
+        display: inline-block;
+        line-height: 1.57;
+        letter-spacing: 0.15em;
+        font-size: 21px;
+        color: $dark;
+        margin: 0;
+      }
+    }
+    &__actions input {
+      @include linkButton;
+    }
+  }
+}

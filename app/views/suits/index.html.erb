@@ -6,6 +6,7 @@
           <%= link_to "ログアウト",  destroy_user_session_path, method: :delete, class: "side-bar__header__logout" %>
           <%= link_to "服を登録", new_suit_path, data: {"turbolinks" => false}, class: "side-bar__header__cloth" %>
         <% else %>
+          <%# 現在不要 %>
           <%= link_to "新規登録", new_user_registration_path, class: 'side-bar__header__singin' %>
           <%= link_to "ログイン", new_user_session_path, class: 'side-bar__header__singin' %>         
         <%end%>
