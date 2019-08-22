@@ -1,14 +1,44 @@
 $(function() {
 
-  var status_num = "status_num"
-  var average_temp_num = "avereage_num"
+  var status_num = ""
+  var average_temp_num = ""
   var mini_temp = 0;
   var max_temp = 0;
+  var tops = {num:1, name:"tops"}
+  var thick_tops = {num:2, name:"thick_tops"}
+  var outer = {num:3, name:"outer"}
+  var pants = {num:4, name:"pants"}
+  var outer_box = new Array()
+  var thick_tops_box = new Array()
+  var tops_box = new Array()
+  var pants_box = new Array()
+  var parent_category_boxes = [outer_box, thick_tops_box, tops_box, pants_box ]
+  var parent_category_list = [outer, thick_tops, tops, pants]
   
-  function appendSuitImage(suit) {
-    var cloth_list = $(".content");
+  function appendSuitImage(suit, parent_category) {
+    var cloth_list = ""
+    switch(parent_category.name){
+      case outer.name:
+      cloth_list = $(".content__inner__outer");
+      break
+
+      case thick_tops.name:
+      cloth_list = $(".content__inner__thick_tops");
+      break
+
+      case tops.name:
+      cloth_list = $(".content__inner__tops");
+      break
+
+      case pants.name:
+      cloth_list = $(".content__inner__pants");
+      break
+    }
+
     var html =
-    `<img src = ${ suit.image.url }>`
+                `<div class = "${parent_category.name}">
+                  <img src = "${ suit.image.url }">
+                </div>`
     cloth_list.append(html);
   }
 
@@ -48,7 +78,7 @@ $(function() {
 
       insertHTML += buildHTML(data, i);
     }
-    $('#weather').html(insertHTML);
+    $('.weather-list').html(insertHTML);
     status_num = choose_weather(weather_tomorrow_time, tomorrow_list_num);
     average_temp_num = choose_temp(weather_today_time, today_list_num);
     mini_temp = convert_temp(average_temp_num)
@@ -65,11 +95,65 @@ $(function() {
     .done(function(suits) {
       if (suits.length !== 0){
         suits.forEach(function(suit){
-          if(suit.category_id === 2){
-          select_category(suit)
-          appendSuitImage(suit);
-          }
+          // console.log(suit)
+          var suit_category = select_category(suit)
+
+          // 衣服をカテゴリごとに分別カウントが少ない順に表示
+
+          parent_category_boxes.forEach(function(parent_category_box, index){
+            parent_category_info = parent_category_list[index]
+            switch(suit_category.id){
+              case parent_category_info.num:
+              parent_category_box.push(suit)
+              parent_category_box.sort(function(a,b){
+                if(a.count < b.count) return -1;
+                if(a.count > b.count) return 1;
+                return 0;
+              })
+              break
+            }
+          })
         });
+
+        // console.log(parent_category_boxes);
+
+        Object.keys(parent_category_boxes).forEach(function(key){
+          
+          var parent_category_box = parent_category_boxes[key]
+          var parent_category  = parent_category_list[key]
+
+            if(parent_category_box.length >= 3){
+              for(var i = 0; i<=2; i++){
+                suit_info = parent_category_box[i]
+                appendSuitImage(parent_category_box[i], parent_category);
+              }
+            } else  if(parent_category_box.length >= 2){
+              for(var i = 0; i<=1; i++){
+                suit_info = parent_category_box[i]
+                appendSuitImage(parent_category_box[i], parent_category);
+              }
+            }  else if(parent_category_box.length == 1){
+                suit_info = parent_category_box[0]
+                appendSuitImage(parent_category_box[0], parent_category);
+              }
+
+          // }
+
+        })
+
+        parent_category_boxes.forEach(function(parent_category_box, index){
+          // console.log(parent_category_box);
+          // console.log(index);
+          // var parent_category  = parent_category_list[index]
+          // console.log(parent_category)
+          // if(parent_category_box.length !== 0){
+          //   for(var i = 0; i<=4; i++){
+          //     suit_info = parent_category_box[i]
+          //     appendSuitImage(suit_info, parent_category);
+          //   }
+          // } 
+        });
+
       }
     })
     .fail(function(suits) {
@@ -82,14 +166,16 @@ $(function() {
     var date = new Date (data.list[i].dt_txt);
     date.setHours(date.getHours());
     var month = date.getMonth()+1;
-    var day = month + "月" + date.getDate() + "日" + Week[date.getDay()] + date.getHours() + "：00";
+    var day = month + "月" + date.getDate() + "日" + Week[date.getDay()];
+    var time = date.getHours() + "：00"
     var icon = data.list[i].weather[0].icon;
     var html =
-    '<div class="weather-report">' +
+    '<div class="weather-list__report">' +
       '<img src="http://openweathermap.org/img/w/' + icon + '.png">' +
-      '<div class="weather-date">' + day + '</div>' +
-      '<div class="weather-main">'+ data.list[i].weather[0].main + '</div>' +
-      '<div class="weather-temp">' + Math.round(data.list[i].main.temp) + '℃</div>' +
+      '<div class="weather-list__report__date">' + day + '</div>' +
+      '<div class="weather-list__report__time">' + time + '</div>' +
+      '<div class="weather-list__report__main">'+ data.list[i].weather[0].main + '</div>' +
+      '<div class="weather-list__report__temp">' + Math.round(data.list[i].main.temp) + '℃</div>' +
     '</div>';
     return html
   }
@@ -180,7 +266,20 @@ $(function() {
       }
 
       function select_category(suit){
-        
+        var categoryHash = $('#all_category').data('categories');
+        var suit_category = ""
+        categoryHash.forEach(function(category){
+          if(suit.category_id === category.id){
+            var children_category_id = category.parent_id
+            categoryHash.forEach(function(category){
+              if(category.id === children_category_id){
+                // var parent_category_id = category.parent_id
+                suit_category = category
+              }          
+            })
+          }
+        })
+        return suit_category
       }
 })
 

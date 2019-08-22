@@ -28,7 +28,6 @@ $(function() {
     // 最低温度を選択した際に最高温度を変化
     function changeMaxtemperature(){
       var maxtemperature = ($('#maxtemperature').val());
-      console.log(maxtemperature);
     // 最低温度変更した際に最高温度から最低温度以下の温度を削除。
       $(".registar-content__inner__form__status__box__temperature__select__mini").change( function() {
         var minitemperature = ($(this).find("option:selected").val());
@@ -46,8 +45,6 @@ $(function() {
     readURL(this);
   });
 
-  
-
   var all_maxtemperature = $("#maxtemperature").html();
   $(".registar-content__inner__form__status__box__temperature__select__mini").on('click', function() {
     changeMaxtemperature();
@@ -55,14 +52,7 @@ $(function() {
 
   function secoundselectbox() {
     var html = `<div class ="registar-content__inner__form__category__second">
-                  <select id="secound_category_id"><option value>---</option></select>
-                </div>`
-    return html
-  }
-
-  function thirdselectbox() {
-    var html = `<div class ="registar-content__inner__form__category__third">
-                  <select id="third_category_id"><option value>---</option></select>
+                  <select id="secound_category_id" name="suit[category_id]"><option value>---</option></select>
                 </div>`
     return html
   }
@@ -74,40 +64,32 @@ $(function() {
 
     $(".registar-content__inner__form__category__first").change(function(){
       var parent_category = ($(this).find("option:selected").val());
+      var outer = 3
+      if(parent_category != outer){
+        document.getElementById("washing").style.display="block";
+      } else {
+        document.getElementById("washing").style.display="none";
+      }
       select(parent_category);
       $(".registar-content__inner__form__category__second").remove();
-      $(".registar-content__inner__form__category__third").remove();
     });
 
+
     function select(parent_category){
+      var categoryHash = $('#all_category').data('categories');
       $.ajax({
         url: '/suits/new',
         dataType: "json",
-        data: {parent_id: parent_category},
         type: 'GET',
       })
-      .done(function(categories){
+      .done(function(){
         var html = secoundselectbox();
         $(".registar-content__inner__form__category").append(html)
-          categories.forEach(function(category){
+          categoryHash.forEach(function(category){
             if(parent_category == category.parent_id){
               var html = appendcategory(category);
               $('#secound_category_id').append(html)
             } 
-        });
-        $(".registar-content__inner__form__category__second").change(function(){
-          var parent_category = ($(this).find("option:selected").val());
-          var html = thirdselectbox();
-          $(".registar-content__inner__form__category__third").remove();
-          $(".registar-content__inner__form__category").append(html)
-          categories.forEach(function(category){
-            if(parent_category == category.parent_id){
-              var html = appendcategory(category);
-              $('#third_category_id').append(html)
-            } else {
-              console.log("ok")
-            }
-          });
         });
       });
     }

@@ -14,22 +14,9 @@
               <%= form.collection_select :category_id, @categories, :id, :name, :prompt => "--" %>
             </div>
           </div>
-          <div class = "registar-content__inner__form__name">
-            <%= form.label "Name",class:"registar-content__inner__form__name__label" %>
-            <%= form.text_field :name, placeholder: 'name',class:"registar-content__inner__form__name__form"  %>
-          </div>
           <div class = "registar-content__inner__form__status">
             <%= form.label "Status",class:"registar-content__inner__form__status__label" %>
             <div class = "registar-content__inner__form__status__box">
-              <div class = "registar-content__inner__form__status__box__washing">
-                <p class = "registar-content__inner__form__status__box__washing__question">タンブラー乾燥は可能ですか？</p>
-                <div class = "registar-content__inner__form__status__box__washing__anwser">
-                  <%= form.radio_button :status, "1", id: "yes" %>
-                  <%= form.label "yes", for: "yes", id: "yes" %>
-                  <%= form.radio_button :status, "2", id: "no" %>
-                  <%= form.label "no", for: "no", id: "yes"  %>
-                </div>
-              </div>
               <div class = "registar-content__inner__form__status__box__temperature">
                 <p class = "registar-content__inner__form__status__box__temperature__question">何度ぐらいで使用しますか？</p>
                 <div class = "registar-content__inner__form__status__box__temperature__select ">
@@ -43,6 +30,15 @@
                   <p class = "registar-content__inner__form__status__box__temperature__select__degree">℃</p>
                 </div>
               </div>
+              <div class = "registar-content__inner__form__status__box__washing" id = "washing">
+                <p class = "registar-content__inner__form__status__box__washing__question">タンブラー乾燥は可能ですか？</p>
+                <div class = "registar-content__inner__form__status__box__washing__anwser">
+                  <%= form.radio_button :status, "1", id: "yes" %>
+                  <%= form.label "yes", for: "yes", id: "yes" %>
+                  <%= form.radio_button :status, "2", id: "no" %>
+                  <%= form.label "no", for: "no", id: "yes"  %>
+                </div>
+              </div>              
             </div>
           </div>
         <div class = "registar-content__inner__form__finish">
@@ -51,3 +47,4 @@
       </div>
     <%end%>
   </div>
+  <div id="all_category" data-categories="<%= @all_categories.to_json %>"></div> 

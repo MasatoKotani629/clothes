@@ -25,3 +25,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+public/uploads/*bundle exec rake db:see
+public/uploads/*
+config/secrets.yml

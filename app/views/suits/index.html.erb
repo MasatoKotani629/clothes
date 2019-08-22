@@ -1,15 +1,30 @@
-<div id ="weather"></div>
-<%= link_to "新規登録", new_user_registration_path, :class => 'post' %>
-<% if user_signed_in? %>
-  <%= link_to "服を登録", new_suit_path, data: {"turbolinks" => false} %>
-<%end%>
+<div class = "top">
+  <div class = inner>
+    <div class = "side-bar">
+      <div class = "side-bar__header">
+        <% if user_signed_in? %>
+          <%= link_to "ログアウト",  destroy_user_session_path, method: :delete, class: "side-bar__header__logout" %>
+          <%= link_to "服を登録", new_suit_path, data: {"turbolinks" => false}, class: "side-bar__header__cloth" %>
+        <% else %>
+          <%= link_to "新規登録", new_user_registration_path, class: 'side-bar__header__singin' %>
+          <%= link_to "ログイン", new_user_session_path, class: 'side-bar__header__singin' %>         
+        <%end%>
+      </div>
+      <div class ="weather-list">
+      </div>
+    </div>
+
 
 <div class= "content">
   <div class = "content__inner">
-    <% if @suits.present? %>
-    <%= form_tag('/suits', method: :get, id: "condition") do %>
-    <%end%>
-    <%end%>
+    <div class = "content__inner__outer"></div>
+    <div class = "content__inner__thick_tops"></div>
+    <div class = "content__inner__tops"></div>
+    <div class = "content__inner__pants"></div>
   </div>
+</div>
+
+<div id="all_category" data-categories="<%= @all_categories.to_json %>"></div> 
+</div>
 </div>
 

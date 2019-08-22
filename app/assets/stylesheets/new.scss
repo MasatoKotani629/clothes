@@ -1,0 +1,251 @@
+#weather{
+  min-height: 500px;
+};
+
+.registar-content {
+  width: 100%;
+  height: 100%;
+  &__inner {
+    width: 800px;
+    background-color: white;
+    margin: 0 auto;
+    &__image{
+      width: 400px;
+      height: 400px;
+      text-align: center;
+      margin: 0 auto;
+      position: relative;
+      &__label {
+        @include label;
+        &__guide {
+          height: 50px;
+          width: 130px;
+          font-size: 25px;
+          font-weight: bold;
+          line-height: 50px;
+          color: white;
+          font-family: 'Tahoma';
+          border-radius: 7px;
+          background-color: blue;
+          position: absolute;
+          top: 130px;
+          left: 135px;
+        }
+      }
+      .fa-tshirt{
+        font-size: 20em;
+        color: gray;
+        opacity: 0.5;
+      }
+      &__picture,img {
+        margin: 0 auto;
+        height: 300px;
+        width: 300px;
+      }
+      &__change {
+        width: 200px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 8px;
+        margin: 0 auto;
+        margin-top: 15px;
+        background-color: #BBBBBB;
+        color: white;
+        font-weight: 550;
+      }
+    }
+    &__form {
+      width: 400px;
+      height: 100%;
+      margin: 0 auto;
+      &__category {
+        padding: 20px 60px;
+        &__label {
+          @include label;
+          display: block;
+          text-align: center;
+        }
+        &__first, &__second, &__third {
+          width: 100%;
+          height: 40px;
+          font-size: 20px;
+          border-radius: 8px;
+          display: inline-block;
+          position: relative;
+          margin-bottom: 5px;
+          &::-ms-expand {
+            display: none;
+          }
+          &::before {
+            position: absolute;
+            top: 1em;
+            right: 0.5em;
+            width: 0;
+            height: 0;
+            padding: 0;
+            content: '';
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #ffffff;
+            pointer-events: none;
+          }
+          select {
+            width: 100%;
+            height: 40px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 7px 30px 7px 20px;
+            font-size: 25px;
+            color: #fff;
+            line-height: 1.1em;
+            border-radius: 5px;
+            border: none;
+            background-repeat: no-repeat;
+            background-size: 12px 10px;
+            background-position: right 10px center;
+            background: #bdc3c7;
+          }
+        }
+      }
+      &__name {
+        padding: 20px 60px;
+        &__label {
+          @include label;
+          display: block;
+          text-align: center;
+        }
+        &__form {
+          width: 280px;
+          height: 40px;
+          font-size: 20px;
+          border-radius: 8px;
+          display: inline-block;
+        }
+      }
+      &__status {
+        padding: 20px 60px;
+        &__label {
+          @include label;
+          display: block;
+          text-align: center;
+        }
+        &__box {
+          &__washing {
+            height: 100px;
+            &__question{
+              height: 25px;
+              font-size: 18px;
+              font-weight: 400;
+              margin-bottom: 10px;
+              text-align: center;
+            }
+            &__anwser {
+              width: 280px;
+              height: 40px;
+              margin: 0;
+              background: #bdc3c7;
+              font-size: 25px;
+              text-align: center;
+              border-radius: 3px;
+              line-height: 40px;
+              // CSS3から変化するまでの時間などを指定
+              transition: .2s;
+              display: flex;
+              input {
+                display: none;
+              }
+              input[type="radio"]:checked + #yes {
+                background-color: #a1b91d;
+                color: #fff;
+              }
+              label {
+                width: 140px;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                &:first-of-type {
+                  border-radius: 3px 0 0 3px;
+                } 
+                &:last-of-type {
+                  border-radius: 0 3px 3px 0;
+                }
+              }    
+            }
+          }
+          &__temperature {
+            height: 100px; 
+            &__question{
+              height: 25px;
+              font-size: 18px;
+              font-weight: 400;
+              margin-bottom: 10px;
+              text-align: center;
+            }
+            &__select {
+              height: 40px;
+              display: flex;
+              &__degree {
+              height: 40px;
+              line-height: 40px;
+              font-size: 26px;
+              margin-left: 22px;
+              }
+              &__mini, &__max{
+                width: 70px;
+                margin-left: 15px;
+                &::-ms-expand {
+                  display: none;
+                }
+                &::before {
+                  position: absolute;
+                  top: 1em;
+                  right: 0;
+                  width: 0;
+                  height: 0;
+                  padding: 0;
+                  content: '';
+                  border-left: 6px solid transparent;
+                  border-right: 6px solid transparent;
+                  border-top: 6px solid #ffffff;
+                  pointer-events: none;
+                }
+                select {
+                  height: 40px;
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                  padding: 7px 30px 7px 20px;
+                  font-size: 25px;
+                  color: #fff;
+                  line-height: 1.1em;
+                  border-radius: 5px;
+                  border: none;
+                  background-repeat: no-repeat;
+                  background-size: 12px 10px;
+                  background-position: right 10px center;
+                  background: #bdc3c7;
+                }
+              }
+            }
+          }
+        }
+      }
+      &__finish {
+        padding: 20px 60px;
+        &__submit {
+          width: 280px;
+          height: 50px;
+          font-size: 25px;
+          font-family: 'Tahoma';
+          color: #fff;
+          border-radius: 8px;
+          letter-spacing: 5px;
+          border: 2px solid blue;
+          background-color: blue;
+          cursor: pointer; 
+        }
+      }
+    }
+  }
+}
