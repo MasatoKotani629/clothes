@@ -25,6 +25,10 @@ class SuitsController < ApplicationController
     @all_categories = Category.all
   end
 
+  def show
+    @suit = Suit.find(params[:id])
+  end
+
   def create
     @suit= Suit.new( image: suit_params[:image], status: suit_params[:status], minitemperature: suit_params[:minitemperature], maxtemperature: suit_params[:maxtemperature], category_id: suit_params[:category_id], user_id: current_user.id)
     num = suit_params[:category_id]

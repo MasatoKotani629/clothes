@@ -34,9 +34,10 @@ $(function() {
       cloth_list = $(".content__inner__pants");
       break
     }
-
+    console.log(suit);
     var html =
-                `<div class = "${parent_category.name}">
+                `<a class="suit" href="/suits/${ suit.id }" title="${ suit.name }">
+                <div class = "${parent_category.name}">
                   <img src = "${ suit.image.url }">
                 </div>`
     cloth_list.append(html);
@@ -95,7 +96,7 @@ $(function() {
     .done(function(suits) {
       if (suits.length !== 0){
         suits.forEach(function(suit){
-          // console.log(suit)
+          console.log(suit)
           var suit_category = select_category(suit)
 
           // 衣服をカテゴリごとに分別カウントが少ない順に表示
@@ -115,7 +116,6 @@ $(function() {
           })
         });
 
-        // console.log(parent_category_boxes);
 
         Object.keys(parent_category_boxes).forEach(function(key){
           
@@ -136,24 +136,7 @@ $(function() {
                 suit_info = parent_category_box[0]
                 appendSuitImage(parent_category_box[0], parent_category);
               }
-
-          // }
-
         })
-
-        parent_category_boxes.forEach(function(parent_category_box, index){
-          // console.log(parent_category_box);
-          // console.log(index);
-          // var parent_category  = parent_category_list[index]
-          // console.log(parent_category)
-          // if(parent_category_box.length !== 0){
-          //   for(var i = 0; i<=4; i++){
-          //     suit_info = parent_category_box[i]
-          //     appendSuitImage(suit_info, parent_category);
-          //   }
-          // } 
-        });
-
       }
     })
     .fail(function(suits) {
@@ -273,7 +256,6 @@ $(function() {
             var children_category_id = category.parent_id
             categoryHash.forEach(function(category){
               if(category.id === children_category_id){
-                // var parent_category_id = category.parent_id
                 suit_category = category
               }          
             })
